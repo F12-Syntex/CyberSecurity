@@ -1,9 +1,27 @@
-
-def decrypt_caesar_cipher(ciphertext):
+def decrypt_caesar_cipher(ciphertext, tess_content):
     ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    return
+    found = False
+    for shift in range(26):
+        plaintext = ''
+        for char in ciphertext:
+            if char.upper() in ALPHABET: 
+                index = (ALPHABET.index(char.upper()) - shift) % 26
+                plaintext += ALPHABET[index] if char.isupper() else ALPHABET[index].lower()
+            else:
+                plaintext += char
 
-input = open("inputfiles/personal_input/cexercise1.txt", "r").readlines()[0].strip()
-print(input)
+        if plaintext in tess_content:
+            print(f"Decryption finished at shift: {shift}, Plaintext: {plaintext}")
+            found = True
+            break   
+    if not found:
+        print("Decryption failed. No matching plaintext found.") 
+        return
 
-decrypt_caesar_cipher(input)
+with open("inputfiles/tess26.txt", "r") as file:
+    tess_content = file.read()
+
+with open("inputfiles/personal_input/cexercise1.txt", "r") as file:
+    ciphertext = file.read().strip() 
+
+decrypt_caesar_cipher(ciphertext, tess_content)
