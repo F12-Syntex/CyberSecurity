@@ -1,1 +1,2 @@
-#Z:\proj\comp5580\decryption\sk902
+input = open("inputfiles/personal_input/cexercise1.txt", "r").readlines()[0].trim()
+print(input)
